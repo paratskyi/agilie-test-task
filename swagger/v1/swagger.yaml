@@ -3,9 +3,90 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/api/v1/notifications":
+    get:
+      summary: notifications list
+      tags:
+      - Notifications
+      parameters:
+      - name: limit
+        in: query
+        type: integer
+        schema:
+          type: integer
+        required: false
+      - name: offset
+        in: query
+        type: integer
+        schema:
+          type: integer
+        required: false
+      responses:
+        '200':
+          description: returns notifications list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/notification"
+                  meta:
+                    "$ref": "#/components/schemas/notifications_meta"
+                required:
+                - data
+                - meta
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/notification"
+                  meta:
+                    "$ref": "#/components/schemas/notifications_meta"
+                required:
+                - data
+                - meta
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000
+components:
+  schemas:
+    notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          type: object
+          properties:
+            title:
+              type: string
+            body:
+              type: string
+            redirect_url:
+              type: string
+            created_at:
+              type: datetime
+            updated_at:
+              type: datetime
+    notifications_meta:
+      type: object
+      properties:
+        limit:
+          type: string
+          required: false
+        offset:
+          type: string
+          required: false
+        total:
+          type: integer
