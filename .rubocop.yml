@@ -9,7 +9,7 @@ AllCops:
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
     - 'config/**/*'
-#    - 'db/**/*'
+    - 'db/schema.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
