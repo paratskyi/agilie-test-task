@@ -17,6 +17,9 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 #Layout/LineLength:
 #  AllowedPatterns: ['(\A|\s)#']
 #

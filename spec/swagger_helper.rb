@@ -51,7 +51,22 @@ RSpec.configure do |config|
               }
             }
           },
-          notifications_meta: {
+          video: {
+            type: :object,
+            properties: {
+              id: { type: :string },
+              type: { type: :string },
+              attributes: {
+                type: :object,
+                properties: {
+                  title: { type: :string },
+                  description: { type: :string },
+                  record_url: { type: :string, required: false }
+                }
+              }
+            }
+          },
+          list_meta: {
             type: :object,
             properties: {
               limit: { type: :string, required: false },

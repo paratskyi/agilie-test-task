@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/notifications', type: :request do
           schema type: :object,
                  properties: {
                    data: { type: :array, items: { '$ref' => '#/components/schemas/notification' } },
-                   meta: { '$ref' => '#/components/schemas/notifications_meta' }
+                   meta: { '$ref' => '#/components/schemas/list_meta' }
                  },
                  required: %w[data meta]
 

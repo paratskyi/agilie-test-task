@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe NotificationList do
-  subject(:notification_list) { NotificationList.perform(params) }
+  subject(:notification_list) { described_class.perform(params) }
 
   let(:params) do
     {
