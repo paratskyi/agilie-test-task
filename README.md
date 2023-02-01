@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Using the following titles of videos, and the app will return the following error responses
 
-Things you may want to cover:
+- 'Bad request' => 400,
+- 'Authorization required' => 401,
+- 'Not allowed' => 403,
+- 'Not found' => 404,
+- 'Already exists' => 409,
+- 'Rate limited' => 420
 
-* Ruby version
+### To start imitation third-pary service processing
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You should run `ruby spec/support/third_party_video_service_responses.rb` in separate environment
