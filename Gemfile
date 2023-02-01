@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rswag-specs', '~> 2.8'
   gem 'shoulda-matchers', '~> 5.3'
   gem 'simplecov', '~> 0.22.0'
+  gem 'webmock', '~> 3.18', '>= 3.18.1'
 end
 
 group :development do

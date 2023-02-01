@@ -1,5 +1,4 @@
 class NotificationList < ApplicationService
-
   def initialize(params)
     @limit = params[:limit]
     @offset = params[:offset]

@@ -1,6 +1,5 @@
 module Videos
   class List < ApplicationService
-
     def initialize(params)
       @limit = params[:limit]
       @offset = params[:offset]

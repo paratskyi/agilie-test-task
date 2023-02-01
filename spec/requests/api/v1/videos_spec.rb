@@ -1,7 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/videos', type: :request do
-
+RSpec.describe 'api/v1/videos' do
   path '/api/v1/videos' do
     get 'videos list' do
       tags 'Videos'
@@ -47,7 +46,6 @@ RSpec.describe 'api/v1/videos', type: :request do
   end
 
   path '/api/v1/videos/{id}' do
-
     get 'show video' do
       tags 'Videos'
       produces 'application/json', 'application/xml'
@@ -77,9 +75,15 @@ RSpec.describe 'api/v1/videos', type: :request do
       end
 
       context 'when id is invalid' do
+        let(:id) { 'invalid' }
+
         response '404', 'video not found' do
-          let(:id) { 'invalid' }
-          run_test!
+          it 'returns expected video' do |example|
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            body = JSON.parse(response.body)
+            expect(body).to eq({ 'message' => "Couldn't find Video" })
+          end
         end
       end
     end
@@ -106,15 +110,33 @@ RSpec.describe 'api/v1/videos', type: :request do
         fixture_file_upload(Rails.root.join('spec/fixtures/files/video_record.mp4'), 'video/mp4')
       end
 
-      response '200', 'video in process' do
+      context 'with valid params' do
+        ActiveJob::Base.queue_adapter = :test
         let(:video) { { title: title, description: description, record: record } }
-        run_test!
+
+        response '200', 'video in process' do
+          it 'returns expected video' do |example|
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            body = JSON.parse(response.body)
+            expect(body).to eq({ 'message' => 'Video in processing' })
+            expect(CreateVideoJob).to have_been_enqueued.exactly(1).times
+          end
+        end
       end
 
-      response '422', 'invalid request' do
+      context 'with invalid params' do
         let(:title) { FFaker::Movie.title }
         let(:video) { { title: title } }
-        run_test!
+
+        response '422', 'invalid request' do
+          it 'returns expected video' do |example|
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            body = JSON.parse(response.body)
+            expect(body).to eq({ 'messages' => ["Description can't be blank"] })
+          end
+        end
       end
     end
   end

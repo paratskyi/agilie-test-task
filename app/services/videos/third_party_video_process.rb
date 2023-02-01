@@ -20,7 +20,11 @@ module Videos
     def make_request
       response = HTTParty.post(endpoint, body: request_body, headers: headers)
 
-      JSON.parse(response).symbolize_keys
+      begin
+        JSON.parse(response).symbolize_keys
+      rescue JSON::ParserError, TypeError => e
+        response.parsed_response
+      end
     end
 
     def headers

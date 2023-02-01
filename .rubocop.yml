@@ -10,6 +10,7 @@ AllCops:
     - 'spec/spec_helper.rb'
     - 'config/**/*'
     - 'db/schema.rb'
+    - 'db/migrate/**/*'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -17,16 +18,26 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
+Style/ArgumentsForwarding:
+  Enabled: false
+
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
-#Layout/LineLength:
-#  AllowedPatterns: ['(\A|\s)#']
-#
-#Metrics/BlockLength:
-#  Exclude:
-#    - 'spec/**/*'
-#
-#Lint/AmbiguousBlockAssociation:
-#  Exclude:
-#    - 'spec/**/*'
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false

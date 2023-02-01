@@ -22,14 +22,7 @@ module Api
         @video = Video.new(create_params)
 
         if @video.valid?
-          record = create_params[:record]
-          ThirdPartyVideoProcessingJob.perform_later(
-            title: create_params[:title],
-            description: create_params[:description],
-            record_path: record.path,
-            original_filename: record.original_filename,
-            content_type: record.content_type
-          )
+          CreateVideoJob.perform_later(prepare_params_for_create_job)
           render json: { message: 'Video in processing' }, status: :ok
         else
           render json: { messages: @video.errors.full_messages }, status: :unprocessable_entity
@@ -48,6 +41,16 @@ module Api
 
       def create_params
         params.require(:video).permit(:title, :description, :record)
+      end
+
+      def prepare_params_for_create_job
+        {
+          title: create_params[:title],
+          description: create_params[:description],
+          record_path: create_params[:record].path,
+          original_filename: create_params[:record].original_filename,
+          content_type: create_params[:record].content_type
+        }
       end
 
       def serializer

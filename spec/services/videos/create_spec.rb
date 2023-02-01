@@ -23,6 +23,12 @@ RSpec.describe Videos::Create do
 
   describe '#perform' do
     context 'when params is present' do
+      before do
+        stub_request(:post, "#{Videos::ThirdPartyVideoProcess::BASE_URL}/process")
+          .with(headers: Videos::ThirdPartyVideoProcess::BASE_HEADERS)
+          .to_return(body: {status: 200, message: 'Success'}.to_json)
+      end
+
       it 'creates video successfully' do
         expect { create_video }.to change(Video, :count).by(1)
       end
@@ -34,7 +40,9 @@ RSpec.describe Videos::Create do
 
       it 'raises error' do
         expect { create_video }
-          .to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title can't be blank, Description can't be blank")
+          .to raise_error(
+            ActiveRecord::RecordInvalid, "Validation failed: Title can't be blank, Description can't be blank"
+          )
       end
     end
   end

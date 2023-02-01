@@ -41,7 +41,6 @@ module Videos
     end
 
     def send_notification
-      @result
       # Notify user about processing result via sockets
       # NotificationsChannel.broadcast_to(current_user, title: 'Video processing finished', body: @result)
     end

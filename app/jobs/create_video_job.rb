@@ -1,4 +1,4 @@
-class ThirdPartyVideoProcessingJob < ApplicationJob
+class CreateVideoJob < ApplicationJob
   queue_as :default
 
   def perform(title:, description:, record_path:, original_filename:, content_type:)

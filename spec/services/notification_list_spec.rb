@@ -45,7 +45,7 @@ RSpec.describe NotificationList do
 
         it_behaves_like 'return expected notifications'
 
-        context 'and offset is 2' do
+        context 'with offset is 2' do
           let(:offset) { 3 }
           let(:expected_notifications) { notifications.last(2) }
 

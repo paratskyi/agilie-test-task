@@ -53,7 +53,7 @@ RSpec.describe Videos::List do
 
         it_behaves_like 'return expected videos'
 
-        context 'and offset is 2' do
+        context 'with offset is 2' do
           let(:offset) { 3 }
           let(:expected_videos) { videos.last(2) }
 
