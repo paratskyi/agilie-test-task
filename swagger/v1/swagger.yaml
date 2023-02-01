@@ -101,7 +101,7 @@ paths:
                 - data
                 - meta
     post:
-      summary: Creates a blog
+      summary: creates a video
       tags:
       - Videos
       parameters: []
@@ -112,7 +112,7 @@ paths:
           description: invalid request
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
@@ -122,9 +122,11 @@ paths:
                   type: string
                 record:
                   type: string
+                  format: binary
               required:
               - title
               - description
+              - record
   "/api/v1/videos/{id}":
     get:
       summary: show video

@@ -7,13 +7,19 @@ RSpec.describe Videos::Create do
     {
       title: title,
       description: description,
-      record: record
+      record_path: record_path,
+      original_filename: original_filename,
+      content_type: content_type
     }
   end
 
   let(:title) { FFaker::Movie.title }
   let(:description) { FFaker::Book.description }
-  let(:record) { nil }
+  let(:record_path) { Rails.root.join('spec/fixtures/files', file_name) }
+  let(:original_filename) { file_name }
+  let(:content_type) { 'video/mp4' }
+
+  let(:file_name) { 'video_record.mp4' }
 
   describe '#perform' do
     context 'when params is present' do

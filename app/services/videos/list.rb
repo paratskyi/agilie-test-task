@@ -16,7 +16,7 @@ module Videos
     private
 
     def load_collection
-      @collection = Video.all
+      @collection = Video.all.with_attached_record
     end
 
     def order_collection!

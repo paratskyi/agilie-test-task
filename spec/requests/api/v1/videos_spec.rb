@@ -86,22 +86,25 @@ RSpec.describe 'api/v1/videos', type: :request do
   end
 
   path '/api/v1/videos' do
-    post 'Creates a blog' do
+    post 'creates a video' do
       tags 'Videos'
-      consumes 'application/json'
-      parameter name: :video, in: :body, schema: {
+      consumes 'multipart/form-data'
+
+      parameter name: :video, in: :formData, schema: {
         type: :object,
         properties: {
           title: { type: :string },
           description: { type: :string },
-          record: { type: :string }
+          record: { type: :string, format: :binary }
         },
-        required: %w[title description]
+        required: %w[title description record]
       }
 
       let(:title) { FFaker::Movie.title }
       let(:description) { FFaker::Book.description }
-      let(:record) { nil }
+      let(:record) do
+        fixture_file_upload(Rails.root.join('spec/fixtures/files/video_record.mp4'), 'video/mp4')
+      end
 
       response '200', 'video in process' do
         let(:video) { { title: title, description: description, record: record } }

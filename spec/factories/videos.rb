@@ -12,6 +12,13 @@ FactoryBot.define do
   factory :video do
     title { FFaker::Movie.title }
     description { FFaker::Book.description }
-    record { nil }
+
+    trait :with_record do
+      after :build do |video|
+        file_name = 'video_record.mp4'
+        file_path = Rails.root.join('spec/fixtures/files', file_name)
+        video.record.attach(io: File.open(file_path), filename: file_name, content_type: 'video/mp4')
+      end
+    end
   end
 end
