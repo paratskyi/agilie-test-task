@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get 'videos/show'
-      get 'videos/create'
-    end
-  end
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+  mount ActionCable.server => '/cable'
 
   namespace :api do
     namespace :v1 do
