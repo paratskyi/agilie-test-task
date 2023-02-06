@@ -11,12 +11,13 @@ module Videos
       420 => ThirdPartyVideoProcessErrors::RateLimitedError
     }.freeze
 
-    def initialize(title:, description:, record_path:, original_filename:, content_type:)
+    def initialize(title:, description:, record_path:, original_filename:, content_type:, process_id:)
       @title = title
       @description = description
       @record_path = record_path
       @original_filename = original_filename
       @content_type = content_type
+      @process_id = process_id
     end
 
     def perform
@@ -42,7 +43,11 @@ module Videos
 
     def send_notification
       # Notify user about processing result via sockets
-      # NotificationsChannel.broadcast_to(current_user, title: 'Video processing finished', body: @result)
+      ActionCable.server.broadcast('system_notification_channel', title: 'Video processing finished', body: prepare_response)
+    end
+
+    def prepare_response
+      @result.merge(process_id: @process_id)
     end
   end
 end
