@@ -24,14 +24,58 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
-              default: 'www.example.com'
+              default: 'localhost:3000'
             }
           }
         }
-      ]
+      ],
+      components: {
+        schemas: {
+          notification: {
+            type: :object,
+            properties: {
+              id: { type: :string },
+              type: { type: :string },
+              attributes: {
+                type: :object,
+                properties: {
+                  title: { type: :string },
+                  body: { type: :string },
+                  redirect_url: { type: :string },
+                  created_at: { type: :datetime },
+                  updated_at: { type: :datetime }
+                }
+              }
+            }
+          },
+          video: {
+            type: :object,
+            properties: {
+              id: { type: :string },
+              type: { type: :string },
+              attributes: {
+                type: :object,
+                properties: {
+                  title: { type: :string },
+                  description: { type: :string },
+                  record_url: { type: :string, required: false }
+                }
+              }
+            }
+          },
+          list_meta: {
+            type: :object,
+            properties: {
+              limit: { type: :string, required: false },
+              offset: { type: :string, required: false },
+              total: { type: :integer }
+            }
+          }
+        }
+      }
     }
   }
 

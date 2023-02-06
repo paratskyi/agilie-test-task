@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'active_model_serializers', '~> 0.10.13'
+gem 'httparty', '~> 0.21.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.2'
 # Use postgresql as the database for Active Record
@@ -25,6 +27,8 @@ gem 'rswag-ui', '~> 2.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'sinatra', '~> 3.0', '>= 3.0.5'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -38,6 +42,7 @@ group :development, :test do
   gem 'rswag-specs', '~> 2.8'
   gem 'shoulda-matchers', '~> 5.3'
   gem 'simplecov', '~> 0.22.0'
+  gem 'webmock', '~> 3.18', '>= 3.18.1'
 end
 
 group :development do
