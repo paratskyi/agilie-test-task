@@ -22,8 +22,8 @@ module Api
         @video = Video.new(create_params)
 
         if @video.valid?
-          CreateVideoJob.perform_later(prepare_params_for_create_job)
-          render json: { message: 'Video in processing' }, status: :ok
+          create_video_job = CreateVideoJob.perform_later(prepare_params_for_create_job)
+          render json: { message: 'Video in processing', process_id: create_video_job.job_id }, status: :ok
         else
           render json: { messages: @video.errors.full_messages }, status: :unprocessable_entity
         end

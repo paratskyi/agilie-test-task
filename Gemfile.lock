@@ -152,6 +152,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (3.0.5)
       rack
     rack-test (2.0.2)
@@ -290,6 +292,7 @@ DEPENDENCIES
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-cors (~> 1.1, >= 1.1.1)
   rails (~> 6.1.7, >= 6.1.7.2)
   rspec-rails (~> 6.0, >= 6.0.1)
   rswag-api (~> 2.8)

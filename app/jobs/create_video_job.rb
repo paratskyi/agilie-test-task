@@ -7,7 +7,8 @@ class CreateVideoJob < ApplicationJob
       description: description,
       record_path: record_path,
       original_filename: original_filename,
-      content_type: content_type
+      content_type: content_type,
+      process_id: job_id
     )
   end
 end
