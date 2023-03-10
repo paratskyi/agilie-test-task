@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ConditionsController < ApplicationController
+    class ConditionController < ApplicationController
       def index
         result = ::Condition.all
 
@@ -22,7 +22,7 @@ module Api
       end
 
       def create_params
-        params.require(:condition).permit(:value, :operator, :model, comparable: [])
+        params.require(:condition).permit(:value, :operator, :model, :comparable_column, associations_chain: [])
       end
     end
   end
