@@ -8,9 +8,12 @@ Rails.application.routes.draw do
       resources :notifications, only: :index
       resources :videos, only: %i[index show create]
       resources :conditions, only: %i[index create]
+
       resources :conditions do
         resource :calculation, only: :create
       end
+
+      resource :association_structure, only: :create
     end
   end
 end
