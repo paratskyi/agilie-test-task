@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2023_03_10_110111) do
   create_table "conditions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "value", null: false
     t.string "operator", null: false
-    t.string "comparable_column", null: false
     t.string "associations_chain", null: false, array: true
     t.string "model", null: false
     t.datetime "created_at", precision: 6, null: false
